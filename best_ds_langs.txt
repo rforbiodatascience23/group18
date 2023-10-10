@@ -9,7 +9,11 @@ Top 10 Data Science Languages of ALL Time:
 3. different
 2. tastes
 <<<<<<< HEAD
+<<<<<<< HEAD
 1. C++
+=======
+1. perl
+>>>>>>> 4303a1ed7514b786a2a5bfcc20e31b35bd26ffe8
 =======
 1. T studio
 >>>>>>> 7c46c7a7178f345926fc5141edccf3784fd9b19d
