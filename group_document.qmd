@@ -44,3 +44,12 @@ hgg
 y = 200 * 3
 y
 ```
+
+**New feature**
+
+Helloo everyone, it's your captain
+
+```{r}
+captain = "Me"
+captain
+```
