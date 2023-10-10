@@ -6,6 +6,13 @@ editor: visual
 
 ## Laia
 
+My code :)
+
+```{r}
+age = 2023-2000
+age
+```
+
 ## Catia
 
 ## Nova
