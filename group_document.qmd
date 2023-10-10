@@ -6,25 +6,18 @@ editor: visual
 
 ## Laia
 
-This is my code
+## Catia
+
+Hello!
 
 ```{r}
-age = 2023-2000
-age
-```
+calculation = 5 * 6251
 
-## Catia
+print(calculation)
+```
 
 ## Nova
 
 ## Eirini
 
 ## Minke
-
-```{r}
-
-```
-
-```{r}
-
-```
