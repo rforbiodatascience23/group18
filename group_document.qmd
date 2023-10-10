@@ -36,7 +36,13 @@ x
 print(Hello)
 ```
 
-hgg
+New feature
+
+```{r}
+x=1
+y=2
+x+y
+```
 
 ## Minke
 
