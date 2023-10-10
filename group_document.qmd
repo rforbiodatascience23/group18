@@ -18,10 +18,10 @@ hjj
 
 ## Minke
 
-```{r}
-
-```
+Hello!
 
 ```{r}
+calculation = 5 * 6251
 
+print(calculation)
 ```
