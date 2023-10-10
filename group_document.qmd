@@ -39,3 +39,8 @@ print(Hello)
 hgg
 
 ## Minke
+
+```{r}
+y = 200 * 3
+y
+```
