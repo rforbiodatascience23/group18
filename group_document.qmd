@@ -13,6 +13,13 @@ age = 2023-2000
 age
 ```
 
+#### New analysis
+
+```{r}
+age_months = (2023-2000)*12
+age_months
+```
+
 ## Catia
 
 Hello!
