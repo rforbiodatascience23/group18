@@ -15,16 +15,6 @@ age
 
 ## Catia
 
-## Nova
-
-## Eirini
-
-```{r}
-hjj
-```
-
-## Minke
-
 Hello!
 
 ```{r}
@@ -32,3 +22,14 @@ calculation = 5 * 6251
 
 print(calculation)
 ```
+
+## Nova
+
+```{r}
+x = 1 * 1 
+x
+```
+
+## Eirini
+
+## Minke
