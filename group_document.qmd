@@ -23,7 +23,7 @@ calculation = 5 * 6251
 print(calculation)
 ```
 
-### New analysis 
+### New analysis
 
 new stuff - crossing fingers
 
