@@ -1,0 +1,124 @@
+---
+title: "Lab 7 Group Assignment : Group 18"
+format: 
+  html:
+     embed-resources: true
+editor: visual
+---
+
+Authors: Cátia Baptista s213049, Laia Devesa Carretero s222800, Minke Oostermeijer s222854, Eirini Giannakopoulou s230204, Nova Forbes s222373.
+
+# Code-Along: Exploring a New Dataset in R
+
+This will be a code-along session to exploring, visualizing and basic modelling of a new dataset using R. You can use this if you are a beginner or looking to re-evaluate your data analysis skills.
+
+For this session we will be working with a breast cancer dataset obtained from the University of Wisconsin Hospitals, Madison, originally part of the MASS package. The dataset contains information on the analysis of biopsies from breast cancer tumours from 699 patients. There are nine qualities checked and scored on a scale of 1 to 10, and at the end the outcome is revealed (benign or malignant).
+
+These will be the general steps performed:
+
+1.  **Data Loading and Exploration**
+
+2.  **Data Cleaning and Preparation**
+
+3.  **Data Visualization**
+
+4.  **Modelling**
+
+5.  **Model Summary**
+
+We will use `tidyverse` and the added R packages to help visualize the data. `broom` will be used to tidy up our model summary for clear interpretation, and `patchwork` to combine and display our visualizations beautifully.
+
+## 1. Data loading and Exploration
+
+First, we will load the packages that we will be using for our analysis. These will be `tidyverse`, `broom` and `patchwork`. Then, we will load our dataset by retrieving it from the URL. Then we want to save this data to our disk and finally have a quick look at the data to get a feel of what's inside the file.
+
+```{r}
+#| message: false
+library(tidyverse)
+library(broom)
+library(patchwork)
+
+# Retrieve the data directly
+biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+
+# Write the data to disk (optional)
+write_csv(x = biopsy, file = "biopsy.csv")
+
+# Looking at the first rows of the dataset
+head(biopsy)
+```
+
+## 2. Data cleaning and Preparation
+
+The next step will be to make sure that the data is 'clean' and ready to use for our analysis. A quick way of doing this is to check if there are any missing values by using the 'is.na' function, if the answer is 'TRUE', this means there are missing values.
+
+```{r}
+any(is.na(biopsy))
+```
+
+There are a lot of different methods to check if a dataset is ready to use, or to clean up and make it ready for use. Luckily, our dataset is already clean, so we will not be focussing on this today.
+
+## 3. Data Visualization
+
+Now that our data is ready to work with, we can use it to further explore. A fun and informative way of doing that is visualizing the data in different plots using `ggplot2`. You can use any type of plot you want, this highly depends on what you exactly want to analyse. In theory, you can use any of the different nine qualities that were scored in the dataset. Here we have shown a scatter plot of the clump_thickness vs the uniform_cell_size and a histogram of the marg_adhedion vs the outcome.
+
+```{r}
+#| message: false
+# Example 1: Scatterplot of clump_thickness vs. uniform_cell_size
+plot1 <- ggplot(biopsy, aes(x = clump_thickness, y = uniform_cell_size, color = outcome)) +
+  geom_point() +
+  labs(title = "Scatterplot of Clump Thickness vs. Uniform Cell Size")
+
+# Example 2: Histogram of marginal adhesion
+plot2 <- ggplot(biopsy, aes(x = marg_adhesion, fill = outcome)) +
+  geom_histogram() +
+  labs(title = "Histogram of Marginal Adhesion")
+
+# Combine the plots using patchwork
+combined_plots <- plot1 + plot2
+combined_plots
+```
+
+The first plot clearly shows that all benign biopsies are smaller in cell size and clump thickness, except for 1 which shows to be an exception. Plot 2 shows that most biopsies have a low score of marginal adhesion, and most of those are benign. It's mostly the malignant biopsies that show a higher degree of marginal adhesion.
+
+## 4. Modelling
+
+After visualization, we need to fit a simple logistic regression model to predict the outcomes based on selected features. Using the same characteristics of step 3 we fitted a model using the `glm` function and used `broom` to tidy the model summary to make it easier to work with and more readable.
+
+```{r}
+#| message: false
+# Recode the "outcome" variable
+biopsy$outcome <- ifelse(biopsy$outcome == "benign", 0, 1)
+
+# Fit a logistic regression model
+model <- glm(outcome ~ clump_thickness + uniform_cell_size + marg_adhesion, data = biopsy, family = "binomial")
+
+# Use broom to tidy the model summary
+tidy_summary <- broom::tidy(model)
+
+# Display the tidy_summary
+tidy_summary
+
+```
+
+\*Explaining the model?
+
+## 5. Model Summary
+
+The last step will be to use our found model and use the `broom` package to extract and visualize the model summary. `patchwork` will be used to combine all the created plots and visualize them together to create an overview of our found results.
+
+```{r}
+#| message: false
+# Example 3: Plot the model coefficients
+coeff_plot <- tidy(model) |> 
+  ggplot(aes(x = term, y = estimate)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Model Coefficients")
+
+# Combine the plots using patchwork
+final_plots <- combined_plots / coeff_plot
+final_plots
+```
+
+The 'Model Coefficents' bar plot shows the estimate found in step 3 of all variables. When presenting these estimates, it's common to include the 'intercept' but to focus your interpretation and discussion on the estimates of the predictor variables, as they provide more actionable insights into how the predictors impact the outcome.
