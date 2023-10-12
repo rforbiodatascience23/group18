@@ -101,7 +101,7 @@ tidy_summary
 
 ```
 
-\*Explaining the model?
+This logistic regression model can now be used to predict the likelihood of a breast cancer tumour being malignant or benign, based on the clump thickness, cell size and marginal adhesion. The intercept represents the baseline log-odds of malignant tumours when all the other variables are zero. Positive coefficients for the other variables indicate that an increase in their values are associated with an increase in the log-odds of malignant tumours. And finally the p-values show the statistical significance, the smaller they are, the stronger the significance.
 
 ## 5. Model Summary
 
@@ -121,4 +121,4 @@ final_plots <- combined_plots / coeff_plot
 final_plots
 ```
 
-The 'Model Coefficents' bar plot shows the estimate found in step 3 of all variables. When presenting these estimates, it's common to include the 'intercept' but to focus your interpretation and discussion on the estimates of the predictor variables, as they provide more actionable insights into how the predictors impact the outcome.
+The 'Model Coefficients' bar plot shows the estimate found in step 3 of all variables. When looking at the estimates, it's common to include the 'intercept' but to focus your interpretation and discussion on the estimates of the other variables because they will show more implementable results on how the variables impact the outcome.
